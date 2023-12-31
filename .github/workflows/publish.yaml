@@ -1,9 +1,9 @@
 name: Modpack Release | Pipeline
 
 on:
-  release:
-    types:
-      - created
+  push:
+    tags:
+      - v0.**
 
 jobs:
   publish:
@@ -14,6 +14,14 @@ jobs:
       # --- Checkout the repo
       - name: Check Out Git Repository
         uses: actions/checkout@v4
+
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: debug release version
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
 
       # --- Install Packwiz
       - name: Install packwiz
@@ -33,10 +41,10 @@ jobs:
       # --- Upload the pack to releases
       - name: Upload Modrinth Modpack to GitHub Releases
         run: |
-          gh release upload $GITHUB_REF mc101.mrpack \
+          gh release upload $RELEASE_VERSION mc101.mrpack \
             --repo ${{ github.repository_owner }}/${{ github.event.repository.name }} \
             --clobber
-          echo "::notice ::☀ Release $GITHUB_REF has been uploaded to Github Releases"
+          echo "::notice ::☀ Release $RELEASE_VERSION has been uploaded to Github Releases"
         shell: bash
         env:
           GITHUB_TOKEN: ${{ github.token }}
