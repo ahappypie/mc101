@@ -33,10 +33,10 @@ jobs:
       # --- Upload the pack to releases
       - name: Upload Modrinth Modpack to GitHub Releases
         run: |
-          gh release upload ${{ GITHUB_REF }} mc101.mrpack \
+          gh release upload $GITHUB_REF mc101.mrpack \
             --repo ${{ github.repository_owner }}/${{ github.event.repository.name }} \
             --clobber
-          echo "::notice ::☀ Release ${{ GITHUB_REF }} has been uploaded to Github Releases"
+          echo "::notice ::☀ Release $GITHUB_REF has been uploaded to Github Releases"
         shell: bash
         env:
           GITHUB_TOKEN: ${{ github.token }}
