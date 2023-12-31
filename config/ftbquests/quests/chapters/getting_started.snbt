@@ -1,0 +1,125 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "getting_started"
+	group: ""
+	id: "539F98E4FD9347AD"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["The goal of this pack is to get you (and your group) familiar with some of the core mechanics of modern, modded Minecraft. This is a progression pack, meaning there are quests to complete and a general sense in which order you should proceed. Nothing is truly gated, however, so you are free to explore the pack on your own."]
+			id: "0122A884684A4D2C"
+			subtitle: "Welcome to the Pack!"
+			tasks: [{
+				id: "08009DB7F7F9A27F"
+				title: "Hello World!"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0122A884684A4D2C"]
+			description: [
+				"The Create mod is all about using motion and kinetics to power contrapions and automate your world! It's our starting point for progression in this pack."
+				""
+				"Several addons, including Create Additions and Create Diesel, are also included."
+			]
+			icon: "create:cogwheel"
+			id: "5FC0674908F9BF43"
+			subtitle: "Perpetual Motion Machine"
+			tasks: [{
+				id: "1B523FB77ECA26F7"
+				title: "Create"
+				type: "checkmark"
+			}]
+			x: -1.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0122A884684A4D2C"]
+			description: [
+				"Ars Nouveau continues modded Minecraft's long tradition of magical play. Craft and cast spells that aid you in mining, combat, exploration...and automation!"
+				""
+				"Addons include Create and Applied Energistics integration."
+			]
+			icon: "ars_nouveau:archmage_spell_book"
+			id: "2D2C3AB1158EC9AC"
+			subtitle: "You're a Wizard!"
+			tasks: [{
+				id: "70B7AA8E117856BD"
+				title: "Ars Nouveau"
+				type: "checkmark"
+			}]
+			x: -2.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0122A884684A4D2C"]
+			description: [
+				"There are no shortage of factory and power generation mods, but none go quite as far as Mekanism. Quintuple your ore yield, build fission and fusion reactors, and don the mighty Mekasuit."
+				""
+				"All recipes are unchanged - except Steel Casings, which are now made via Create."
+			]
+			icon: {
+				Count: 1b
+				id: "mekanism:ultimate_energy_cube"
+				tag: {
+					mekData: {
+						EnergyContainers: [{
+							Container: 0b
+							stored: "256000000"
+						}]
+					}
+				}
+			}
+			id: "60A6B5BCCBF975D9"
+			tasks: [{
+				id: "02E3974BBF4FEFFD"
+				title: "Mekanism"
+				type: "checkmark"
+			}]
+			x: 1.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0122A884684A4D2C"]
+			description: ["Automate everything! Convert your chest rooms into searchable, sortable digital storage. Applied Energistics is all about mass-energy equivalence and the consequences for your factory."]
+			icon: "ae2:controller"
+			id: "596182E447034BCD"
+			subtitle: "e=mc^2"
+			tasks: [{
+				id: "71CBEC0C88AC568A"
+				title: "Applied Energistics"
+				type: "checkmark"
+			}]
+			x: 2.5d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"596182E447034BCD"
+				"2D2C3AB1158EC9AC"
+				"5FC0674908F9BF43"
+				"60A6B5BCCBF975D9"
+			]
+			description: [
+				"Before we get started, a quick introduction!"
+				""
+				"I am a (highly) opininated player! The following quests reflect how I typically play through a modpack. You do not have to play this way. Nothing in these quests is blocking you from progressing your way."
+				""
+				"However, in the &3Quick Start&r chapter, you can bypass some setup requirements (i.e. mining) if you want to get right to automation or are playing on a flat world."
+			]
+			id: "237FA293AF77DDD9"
+			tasks: [{
+				id: "4CD6C94D43914CC9"
+				title: "Let's Go!"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: 4.0d
+		}
+	]
+	title: "1: Getting Started"
+}
