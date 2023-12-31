@@ -3,7 +3,7 @@ name: Modpack Release | Pipeline
 on:
   workflow_dispatch:
     inputs:
-      tag:
+      release-tag:
         description: "Tag for the release (i.e. version)"
         required: true
         type: string
@@ -32,18 +32,17 @@ jobs:
       # --- Build Modrinth Pack
       - name: Build Modrinth Modpack
         run: |
-          packwiz modrinth export
-          echo "::notice ::⚙ Modpack ${{ inputs.modpack }} has been exported as .mrpack"
+          packwiz modrinth export -o mc101.mrpack
+          echo "::notice ::⚙ Modpack has been exported as mc101.mrpack"
         shell: bash
-        working-directory: ${{ inputs.modpack }}
 
       # --- Upload the pack to releases
       - name: Upload Modrinth Modpack to GitHub Releases
         run: |
-          gh release upload ${{ inputs.release-tag }} *.mrpack \
+          gh release upload ${{ inputs.release-tag }} mc101.mrpack \
             --repo ${{ github.repository_owner }}/${{ github.event.repository.name }} \
             --clobber
-          echo "::notice ::☀ Modpack ${{ inputs.modpack }} has been uploaded to GitHub Releases as a .mrpack"
+          echo "::notice ::☀ Release ${{ inputs.release-tag }} has been uploaded to Github Releases"
         shell: bash
         env:
           GITHUB_TOKEN: ${{ github.token }}
