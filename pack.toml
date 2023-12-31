@@ -1,0 +1,13 @@
+name = "[MC-101] Intro to Modded Minecraft"
+author = "ahappypie"
+version = "0.0.1"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "36463ed93b74b68420d9dec52ccdc1bb0473f1e3eb80e4c06db43e93981c69ea"
+
+[versions]
+minecraft = "1.20.1"
+neoforge = "47.1.84"
