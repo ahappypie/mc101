@@ -1,12 +1,9 @@
 name: Modpack Release | Pipeline
 
 on:
-  workflow_dispatch:
-    inputs:
-      release-tag:
-        description: "Tag for the release (i.e. version)"
-        required: true
-        type: string
+  release:
+    types:
+      - created
 
 jobs:
   publish:
@@ -17,9 +14,6 @@ jobs:
       # --- Checkout the repo
       - name: Check Out Git Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: 'main'
 
       # --- Install Packwiz
       - name: Install packwiz
@@ -39,10 +33,10 @@ jobs:
       # --- Upload the pack to releases
       - name: Upload Modrinth Modpack to GitHub Releases
         run: |
-          gh release upload ${{ inputs.release-tag }} mc101.mrpack \
+          gh release upload ${{ GITHUB_REF }} mc101.mrpack \
             --repo ${{ github.repository_owner }}/${{ github.event.repository.name }} \
             --clobber
-          echo "::notice ::☀ Release ${{ inputs.release-tag }} has been uploaded to Github Releases"
+          echo "::notice ::☀ Release ${{ GITHUB_REF }} has been uploaded to Github Releases"
         shell: bash
         env:
           GITHUB_TOKEN: ${{ github.token }}
