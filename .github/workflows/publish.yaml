@@ -5,6 +5,9 @@ on:
     tags:
       - v0.**
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     name: Publish Modpack to Github Releases
@@ -15,13 +18,9 @@ jobs:
       - name: Check Out Git Repository
         uses: actions/checkout@v4
 
+      # --- Get the release tag
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-
-      - name: debug release version
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
 
       # --- Install Packwiz
       - name: Install packwiz
