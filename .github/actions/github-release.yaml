@@ -1,0 +1,49 @@
+name: 'Build Modpack Action | Action'
+description: 'Uses packwiz to build the modpack!'
+inputs:
+  release-tag:
+    description: "The release tag for the modpack upload"
+    required: true
+  modpack:
+    description: "Path to the modpack directory"
+    required: false
+    default: '.'
+
+runs:
+  using: "composite"
+
+  steps:
+    # --- Checkout the repo
+    - name: Check Out Git Repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        ref: 'main'
+
+    # --- Install Packwiz
+    - name: Install packwiz
+      uses: supplypike/setup-bin@v3
+      with:
+        uri: "https://nightly.link/packwiz/packwiz/workflows/go/main/Linux%2064-bit%20x86.zip"
+        name: "packwiz"
+        version: "linux"
+
+    # --- Build Modrinth Pack
+    - name: Build Modrinth Modpack
+      run: |
+        packwiz modrinth export
+        echo "::notice ::⚙ Modpack ${{ inputs.modpack }} has been exported as .mrpack"
+      shell: bash
+      working-directory: ${{ inputs.modpack }}
+
+    # --- Upload the pack to releases
+    - name: Upload Modrinth Modpack to GitHub Releases
+      run: |
+        gh release upload ${{ inputs.release-tag }} *.mrpack \
+          --repo ${{ github.repository_owner }}/${{ github.event.repository.name }} \
+          --clobber
+        echo "::notice ::☀ Modpack ${{ inputs.modpack }} has been uploaded to GitHub Releases as a .mrpack"
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      working-directory: ${{ inputs.modpack }}

@@ -1,0 +1,20 @@
+name: Modpack Release | Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag for the release (i.e. version)"
+        required: true
+        type: string
+
+jobs:
+  publish:
+    name: Publish Modpack to Github Releases
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Release Modpack
+      uses: ./.github/actions/github-release
+      with:
+        release-tag: ${{ inputs.tag }}
