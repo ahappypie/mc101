@@ -15,7 +15,7 @@ runs:
   steps:
     # --- Checkout the repo
     - name: Check Out Git Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
         ref: 'main'

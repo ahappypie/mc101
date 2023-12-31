@@ -14,7 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Release Modpack
-      uses: ./.github/actions/github-release
-      with:
-        release-tag: ${{ inputs.tag }}
+      - name: Check Out Git Repository
+        uses: actions/checkout@v4
+
+      - name: Release Modpack
+        uses: ./.github/actions/github-release
+        with:
+          release-tag: ${{ inputs.tag }}
